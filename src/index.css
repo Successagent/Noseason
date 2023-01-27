@@ -52,11 +52,13 @@ body {
   height: 100px;
   padding: 30px;
   position: fixed;
+  inset: 0;
   top: 0;
   width: 100%;
   backdrop-filter: blur(3px);
   z-index: 999;
   transition: all ease-in-out 800ms;
+
 }
 
 .navbar-2 {
