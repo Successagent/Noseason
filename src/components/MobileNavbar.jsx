@@ -16,7 +16,9 @@ const MobileNavbar = ({}) => {
   return (
     <div className="mobile-navbar">
       <div>
-        <h2>NOSEASON</h2>
+        <Link>
+          <h2>NOSEASON</h2>
+        </Link>
       </div>
       <div className="navigation-con">
         <CgProfile />
