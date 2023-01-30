@@ -24,8 +24,10 @@ const Home = ({ fade_down, fade_up, fade_left, fade_right }) => {
           width="100%"
         />
       </div>
-      <Navbar pathname={pathname} />
-      <MobileNavbar />
+      <div className="home-navbar">
+        <Navbar pathname={pathname} />
+        <MobileNavbar />
+      </div>
       <section className="home-landing-section">
         <p data-aos={fade_down}>SAN DIEGO #1 REAL ESTATE</p>
         <h1>NO SEASON </h1>

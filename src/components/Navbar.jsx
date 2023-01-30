@@ -6,7 +6,7 @@ import titleLogo from "../assets/blair-owens-logo-white@2x.png";
 import titleLogo2 from "../assets/blair-owens-logo@2x.png";
 
 const Navbar = ({ pathname }) => {
-  const [headerStyle, setHeaderStyle] = useState("nav");
+  const [headerStyle, setHeaderStyle] = useState("navbar");
 
   const listenScrollEvent = () => {
     if (window.scrollY < 700) {
@@ -21,9 +21,9 @@ const Navbar = ({ pathname }) => {
     return () => window.removeEventListener("scroll", listenScrollEvent);
   }, []);
   return (
-    <div className={headerStyle}>
+    <div className={`${headerStyle} nav`}>
       <div className="navbar-title-con">
-        <Link to="/">
+        <Link to="/" className="link">
           <h2 className="black">NOSEASON</h2>
         </Link>
       </div>

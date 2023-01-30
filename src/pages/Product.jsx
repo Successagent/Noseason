@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useLocation, Form } from "react-router-dom";
-import "react-loading-skeleton/dist/skeleton.css";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { client, urlFor } from "../lib/client";
-import { Products } from "../components";
-import Login from "./Login";
+import {
+  Button,
+  Footer,
+  MobileNavbar,
+  Navbar,
+  SearchModal,
+} from "../components";
+import { AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
+import { MdFacebook } from "react-icons/md";
+import { FaTwitter, FaYoutube, FaLinkedinIn } from "react-icons/fa";
+import agent from "../assets/agent-7.jpg";
+import { CgInstagram } from "react-icons/cg";
 
 const Product = () => {
   const [house, setHouse] = useState([]);
@@ -34,21 +43,94 @@ const Product = () => {
   }, [slug]);
 
   return (
-    <div className="product-view-con">
-      <div className="product-view-image-con">
-        {house[0]?.image?.map((item, idx) => (
-          <img key={idx} src={urlFor(item)} />
-        ))}
+    <div className="product-con">
+      <div className="product-navbar">
+        <Navbar pathname={pathname} />
+        <MobileNavbar pathname={pathname} />
       </div>
-      <div className="product-view-text-con">
-        <h1>{house[0]?.street}</h1>
-        <p>{house[0]?.city}</p>
-        <div>
-          <h2>${house[0]?.price}</h2>
-          <img src={""} alt="" />
+      <SearchModal />
+      <div className="contact-map-flex">
+        <p>Product</p>
+        <div className="map-nav-con">
+          <Link to="/">
+            <li>Home</li>
+          </Link>
+          <Link to="/">
+            <li>Product</li>
+          </Link>
         </div>
-        <form className="product-form"></form>
       </div>
+      <div className="product-view-con">
+        <div className="product-view-image-con">
+          {house[0]?.image?.map((item, idx) => (
+            <img key={idx} src={urlFor(item)} />
+          ))}
+        </div>
+        <div className="product-view-text-con">
+          <div className="product-feature-sect">
+            <Button title="Featured" />
+          </div>
+          <h1 className="product-title">{house[0]?.street}</h1>
+          <p>{house[0]?.city}</p>
+          <div>
+            <h2>${house[0]?.price}</h2>
+            <img src={""} alt="" />
+          </div>
+          <div className="noseason-contact-sect">
+            <div>
+              <div>
+                <h2>Noseaon</h2>
+                <img src={agent} alt="" />
+              </div>
+              <div>
+                <div className="product-contact-flex">
+                  <AiOutlinePhone />
+                  <p>(+234) 7088613251</p>
+                </div>
+                <div className="product-contact-flex">
+                  <AiOutlinePhone />
+                  <p>(+234) 7088613251</p>
+                </div>
+                <div className="product-contact-flex">
+                  <AiOutlinePhone />
+                  <p>(+234) 7088613251</p>
+                </div>
+                <div className="product-contact-flex">
+                  <AiOutlineMail />
+                  <p>noseason@gmail.com</p>
+                </div>
+                <div className="product-contact-flex product-icons-con">
+                  <div>
+                    <FaTwitter />
+                  </div>
+                  <div>
+                    <MdFacebook />
+                  </div>
+                  <div>
+                    <CgInstagram />
+                  </div>
+                  <div>
+                    <FaLinkedinIn />
+                  </div>
+                  <div>
+                    <FaYoutube />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="product-form-con">
+              <p>Request more Information</p>
+              <form className="product-form">
+                <input type="text" placeholder="Name" />
+                <input type="email" placeholder="Email" />
+                <input type="text" placeholder="Phone" />
+                <Button title="Login" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 };
