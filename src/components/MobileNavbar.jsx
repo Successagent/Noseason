@@ -18,18 +18,7 @@ const MobileNavbar = ({ pathname }) => {
   return (
     <div className="mobile-navbar">
       <div>
-        <img
-          src={
-            pathname == "/properties" ||
-            pathname == "/search" ||
-            pathname == "/communities" ||
-            pathname == "/contact" ||
-            pathname == "/about"
-              ? titleLogo2
-              : navLogo
-          }
-          alt=""
-        />
+        <h2>NOSEASON</h2>
       </div>
       <div className="navigation-con">
         <CgProfile />
