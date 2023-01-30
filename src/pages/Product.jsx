@@ -6,6 +6,7 @@ import {
   Footer,
   MobileNavbar,
   Navbar,
+  Products,
   SearchModal,
 } from "../components";
 import { AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
@@ -37,7 +38,6 @@ const Product = () => {
       )
       .then((data) => {
         setHouse(data);
-        console.log(data);
       })
       .catch((err) => console.log(err));
   }, [slug]);
@@ -74,11 +74,10 @@ const Product = () => {
           <p>{house[0]?.city}</p>
           <div>
             <h2>${house[0]?.price}</h2>
-            <img src={""} alt="" />
           </div>
           <div className="noseason-contact-sect">
             <div>
-              <div>
+              <div className="noseason-contact-sect-item-one">
                 <h2>Noseaon</h2>
                 <img src={agent} alt="" />
               </div>
@@ -126,6 +125,9 @@ const Product = () => {
                 <input type="text" placeholder="Phone" />
                 <Button title="Login" />
               </form>
+            </div>
+            <div className="product-products-con">
+              <Products slug={slug} />
             </div>
           </div>
         </div>

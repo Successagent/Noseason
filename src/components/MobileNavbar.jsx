@@ -6,7 +6,7 @@ import { FaAngleUp } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-const MobileNavbar = () => {
+const MobileNavbar = ({}) => {
   const [toggleNav, setToggleNav] = useState(false);
 
   const handleNav = () => {

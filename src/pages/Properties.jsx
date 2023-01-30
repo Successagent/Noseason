@@ -5,7 +5,6 @@ import Products from "../components/Products";
 
 const Properties = ({ fade_up }) => {
   const { pathname } = useLocation();
-  console.log(pathname);
 
   return (
     <section className="properties-page">

@@ -8,7 +8,7 @@ import { client, urlFor } from "../lib/client";
 
 import { Button } from "../components";
 
-const Products = ({ pathname, fade_up }) => {
+const Products = ({ pathname, fade_up, slug }) => {
   const [loading, setLoading] = useState(false);
   const [houses, setHouses] = useState([]);
   let filter9 = houses.slice(0, 9);
@@ -16,7 +16,9 @@ const Products = ({ pathname, fade_up }) => {
   let view = houses.slice(0, 4);
   let componentMounted = true;
 
-  const getProducts = async () => {
+  console.log(slug);
+
+  const getProducts = () => {
     setLoading(true);
     if (componentMounted) {
       setLoading(false);
@@ -70,10 +72,10 @@ const Products = ({ pathname, fade_up }) => {
     return (
       pathname == "/properties"
         ? filter9
+        : slug == slug
+        ? view
         : pathname == "/search"
         ? filter12
-        : pathname == "/products/:slug"
-        ? view
         : houses
     ).map((product, idx) => (
       <Link
