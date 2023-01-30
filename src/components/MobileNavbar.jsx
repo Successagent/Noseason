@@ -16,7 +16,7 @@ const MobileNavbar = ({}) => {
   return (
     <div className="mobile-navbar">
       <div>
-        <Link>
+        <Link to="/">
           <h2>NOSEASON</h2>
         </Link>
       </div>
