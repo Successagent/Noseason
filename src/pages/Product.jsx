@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, Form } from "react-router-dom";
 import "react-loading-skeleton/dist/skeleton.css";
 import { client, urlFor } from "../lib/client";
 import { Products } from "../components";
+import Login from "./Login";
 
 const Product = () => {
   const [house, setHouse] = useState([]);
@@ -46,7 +47,7 @@ const Product = () => {
           <h2>${house[0]?.price}</h2>
           <img src={""} alt="" />
         </div>
-        {/* <Products pathname={pathname} /> */}
+        <form className="product-form"></form>
       </div>
     </div>
   );
