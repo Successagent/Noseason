@@ -1570,6 +1570,7 @@ img {
 
   .property-product-con {
     grid-template-columns: 1fr;
+    padding: 30px 15px;
   }
 
   .about-comment-section {
