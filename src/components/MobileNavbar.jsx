@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import titleLogo2 from "../assets/blair-owens-logo@2x.png";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
-import { FaAngleUp, FaArrowDown } from "react-icons/fa";
+import { FaAngleUp } from "react-icons/fa";
 
 import { CgProfile } from "react-icons/cg";
 import { RxHamburgerMenu } from "react-icons/rx";
-
-import navLogo from "../assets/mobile.png";
 
 const MobileNavbar = ({ pathname }) => {
   const [toggleNav, setToggleNav] = useState(false);
@@ -15,6 +14,13 @@ const MobileNavbar = ({ pathname }) => {
   const handleNav = () => {
     setToggleNav(!toggleNav);
   };
+
+  useEffect(() => {
+    Aos.init({
+      duration: 2000,
+    });
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="mobile-navbar">
       <div>
@@ -26,25 +32,39 @@ const MobileNavbar = ({ pathname }) => {
           <RxHamburgerMenu onClick={handleNav} />
         </div>
       </div>
-      <ul className="mobile-navigation" data-visible={toggleNav}>
+      <ul
+        className="mobile-navigation"
+        data-aos="fade-left"
+        data-visible={toggleNav}
+      >
         <div className="mobile-nav-flex">
-          <Link className="link">Our Properties</Link>
+          <Link to="/properties" className="link">
+            Our Properties
+          </Link>
           <FaAngleUp />
         </div>
         <div className="mobile-nav-flex">
-          <Link className="link">Search For Properties</Link>
+          <Link to="/search" className="link">
+            Search For Properties
+          </Link>
           <FaAngleUp />
         </div>
         <div className="mobile-nav-flex">
-          <Link className="link">Communities</Link>
+          <Link to="/communities" className="link">
+            Communities
+          </Link>
           <FaAngleUp />
         </div>
         <div className="mobile-nav-flex">
-          <Link className="link">About Noseason</Link>
+          <Link to="/about" className="link">
+            About Noseason
+          </Link>
           <FaAngleUp />
         </div>
         <div className="mobile-nav-flex">
-          <Link className="link">Contact Us</Link>
+          <Link to="/contact" className="link">
+            Contact Us
+          </Link>
           <FaAngleUp />
         </div>
       </ul>
