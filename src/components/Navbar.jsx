@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-
-import titleLogo from "../assets/blair-owens-logo-white@2x.png";
-import titleLogo2 from "../assets/blair-owens-logo@2x.png";
-
 const Navbar = ({ pathname }) => {
   const [headerStyle, setHeaderStyle] = useState("navbar");
 
