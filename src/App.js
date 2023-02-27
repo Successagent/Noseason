@@ -8,13 +8,12 @@ import {
   Communities,
   Contact,
   Home,
-  Login,
   Product,
-  Profile,
   Properties,
-  Registration,
   Search,
 } from "./pages";
+
+import { AdminDashboard, Login, Registration } from "./pages/Admin";
 
 function App() {
   const { pathname } = useLocation();
@@ -51,9 +50,9 @@ function App() {
         />
         <Route path="/search" element={<Search />} />
         <Route path="/products/:slug" element={<Product />} />
-        <Route path="/profile-settings" element={<Profile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </>
   );

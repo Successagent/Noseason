@@ -6,9 +6,7 @@ import Home from "./Home";
 import Product from "./Product";
 import Profile from "./Profile";
 import Properties from "./Properties";
-import Registration from "./Registration";
 import Search from "./Search";
-import Login from "./Login";
 
 export {
   Home,
@@ -19,6 +17,4 @@ export {
   Search,
   Product,
   Profile,
-  Registration,
-  Login,
 };

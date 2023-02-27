@@ -3,7 +3,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { Button } from "../components";
+import { Button } from "../../components";
 
 const Registration = () => {
   const {

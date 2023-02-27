@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import { Button, MobileNavbar, Navbar, SearchModal } from "../components";
-import Home from "./Home";
+import { Button, MobileNavbar, Navbar, SearchModal } from "../../components";
+import Home from "../Home";
 
 const Login = () => {
   const [loginEmail, setLoginEmail] = useState(null);

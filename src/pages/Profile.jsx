@@ -92,7 +92,7 @@ const Profile = () => {
                 </div>
               </div>
               <div className="submit-con">
-                <Button />
+                <Button title="send" />
               </div>
             </form>
           </div>

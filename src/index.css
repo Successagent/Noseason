@@ -96,17 +96,19 @@ body {
 .about-hero-sect .navbar h2,
 .communities-hero-sect .navbar h2,
 .search-hero-sec .navbar h2,
-.product-navbar .navbar h2 {
+.product-navbar .navbar h2,
+.admin-dashboard .navbar .h2 {
   font-size: 40px;
 }
 
 .home-navbar .navbar-2 h2,
-.contact-page .navbar h2,
-.property-hero .navbar h2,
-.about-hero-sect .navbar h2,
-.communities-hero-sect .navbar h2,
-.search-hero-sec .navbar h2,
-.product-navbar .navbar h2 {
+.contact-page .navbar-2 h2,
+.property-hero .navbar-2 h2,
+.about-hero-sect .navbar-2 h2,
+.communities-hero-sect .navbar-2 h2,
+.search-hero-sec .navbar-2 h2,
+.product-navbar .navbar-2 h2,
+.admin-dashboard .navbar-2 .h2 {
   font-size: 40px;
 }
 
@@ -173,6 +175,11 @@ img {
   color: #03b5c3;
   border: 1px solid #03b5c3;
   cursor: pointer;
+  transition: all ease-in-out 300ms;
+}
+
+.btn:hover {
+  transform: scale(1.03);
 }
 
 
@@ -489,7 +496,8 @@ img {
 .about-hero-sect .navbar,
 .communities-hero-sect .navbar,
 .search-hero-sec .navbar,
-.product-navbar .navbar {
+.product-navbar .navbar,
+.admin-dashboard .navbar {
   background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(3px);
 }
@@ -499,7 +507,8 @@ img {
 .about-hero-sect .navbar li,
 .communities-hero-sect .navbar li,
 .search-hero-sec .navbar li,
-.product-navbar .navbar li {
+.product-navbar .navbar li,
+.admin-dashboard .navbar li {
   color: #75797f;
   font-size: 14px;
   font-family: "Lato", sans-serif;
@@ -635,7 +644,8 @@ img {
 .property-hero .navbar .link,
 .about-hero-sect .navbar .link,
 .communities-hero-sect .navbar .link,
-.search-hero-sec .navbar .link {
+.search-hero-sec .navbar .link,
+.admin-dashboard .navbar .link {
   color: #75797f !important;
 }
 
@@ -750,7 +760,6 @@ img {
   color: #75797f;
   padding: 0;
   width: 100px;
-
 }
 
 .property-product-details {
@@ -763,6 +772,131 @@ img {
   font-family: "Lato", sans-serif;
   font-size: 23px;
   padding-left: 15px;
+}
+
+.dashboard-intro {
+  background-color: #f6f6f6;
+  height: 300px;
+  padding: 100px 500px;
+  margin-top: 100px;
+  font-size: 40px;
+  font-family: "Poppins", sans-serif;
+  color: #2c3e50;
+}
+
+.admin-hero {
+  padding: 100px 30px;
+  position: relative;
+}
+
+.admin-hero-main-sect {
+  display: grid;
+  grid-template-columns: repeat(2, 250px);
+  gap: 1rem;
+  grid-template-areas: none;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background-color: #171717ad;
+  backdrop-filter: blur(10px);
+  top: 0;
+  padding: 1rem;
+  z-index: 10000;
+  left: 0;
+  scrollbar-width: none;
+  place-content: center;
+  transform: translateY(-1000px);
+  transition: all ease-in-out 350ms;
+  overflow: hidden;
+}
+
+.admin-card {
+  padding: 50px 30px;
+}
+
+.admin-card-parent-con {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+
+.admin-hero-main-item {
+  position: relative;
+}
+
+.admin-hero-main-item>div {
+  transform: translateY(-1000px);
+  transition: all ease-in-out 350ms;
+  cursor: pointer;
+}
+
+.open-dropdown {
+  transform: translateY(0px) !important;
+}
+
+.admin-hero-main-item>div li {
+  border-bottom: 1px solid #03b5c3;
+  padding-bottom: 10px;
+}
+
+.listing-type {
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  z-index: 999;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.open-modal {
+  transform: translateY(0px);
+}
+
+.admin-hero-main-sect .green {
+  background-color: green;
+  border: none;
+  color: white;
+}
+
+.admin-hero-main-sect h3 {
+  text-transform: capitalize;
+  margin-bottom: .3rem;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.admin-hero-main-sect input {
+  padding: 6px 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #2c3e50;
+  background-color: transparent;
+  border: 1px solid #d6d6d6;
+  width: 100%;
+  height: 45px;
+  cursor: pointer;
+  color: white;
+  font-family: "Lato", sans-serif;
+}
+
+
+
+.admin-hero-main-sect input:active,
+.admin-hero-main-sect input:focus,
+.admin-hero-main-sect input:hover {
+  outline: #03b5c3;
+  border: 1px solid #03b5c3;
+}
+
+.admin-hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .property-product-details h3 {
