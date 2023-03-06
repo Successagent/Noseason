@@ -1844,4 +1844,31 @@ img {
   .footer>p {
     font-size: 14px;
   }
+
+  .dashboard-intro {
+    padding: 30px;
+    height: auto;
+  }
+
+  .admin-hero-main-sect {
+    grid-template-columns: 1fr;
+    height: 100vh;
+    padding-top: 350px;
+    overflow: scroll;
+  }
+
+  .admin-dashboard h1 {
+    font-size: 35px;
+    text-align: center;
+  }
+
+  .admin-hero-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .admin-hero-header .btn {
+    width: 80%;
+    margin: auto;
+  }
 }
