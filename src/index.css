@@ -805,7 +805,7 @@ img {
   left: 0;
   scrollbar-width: none;
   place-content: center;
-  transform: translateY(-1000px);
+  transform: translateY(-1500px);
   transition: all ease-in-out 350ms;
   overflow: hidden;
 }

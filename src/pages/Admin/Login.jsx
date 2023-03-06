@@ -24,7 +24,7 @@ const Login = () => {
 
     if (logins.data !== "ERROR: 1") {
       localStorage.setItem("userDetails", logins.data);
-      navigate("/profile-settings");
+      navigate("/admin");
     }
   };
   return (
