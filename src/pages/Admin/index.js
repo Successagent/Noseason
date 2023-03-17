@@ -1,5 +1,5 @@
 import AdminDashboard from "./AdminDashboard";
-import Login from "./Login";
-import Registration from "./Registration";
+import AdminLogin from "./AdminLogin";
+import AdminRegistration from "./AdminRegistration";
 
-export { AdminDashboard, Registration, Login };
+export { AdminDashboard, AdminRegistration, AdminLogin };

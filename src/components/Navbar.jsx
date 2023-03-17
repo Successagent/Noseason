@@ -41,7 +41,7 @@ const Navbar = ({ pathname }) => {
         </Link>
       </div>
       <div className="navbar-profile">
-        <Link to="/login">
+        <Link to={`${pathname === "/admin" ? "/admin-register" : ""}`}>
           <CgProfile className="link" />
         </Link>
       </div>

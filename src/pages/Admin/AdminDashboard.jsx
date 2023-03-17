@@ -20,6 +20,8 @@ const AdminDashboard = () => {
     },
   ]);
 
+  const { pathname } = useLocation();
+
   const changeHandle = (e) => {
     setAdminProduct({ ...adminProduct, [e.target.name]: e.target.value });
   };
@@ -88,7 +90,6 @@ const AdminDashboard = () => {
     }
   };
 
-  const { pathname } = useLocation();
   return (
     <section className="admin-dashboard">
       <Navbar pathname={pathname} />
