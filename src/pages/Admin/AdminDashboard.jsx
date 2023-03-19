@@ -1,62 +1,98 @@
 import React, { useEffect, useState } from "react";
 import { Button, Footer, MobileNavbar, Navbar } from "../../components";
 import { useLocation } from "react-router-dom";
+import AdminCreatedProduct from "./AdminCreatedProduct";
+import { useGlobalContext } from "../../context/context";
+import axios from "axios";
+import { useForm } from "react-hook-form";
 
 const AdminDashboard = () => {
   const [modal, setModal] = useState(1);
-  const [mainAdminData, setMainAdminData] = useState([]);
-  const [adminProduct, setAdminProduct] = useState([
-    {
-      headerDescription: "",
-      listingType: "Rent",
-      propertyType: "",
-      measurementUnit: "",
-      askingPrice: "",
-      marketValue: "",
-      state: "",
-      city: "",
-      locationName: "",
-      landSize: "",
-    },
-  ]);
+  let accessToken = JSON.parse(localStorage.getItem("token"));
+  const { hostUrl } = useGlobalContext();
+  const [available, setAvailable] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState(() => {
+    const sessionStorageProduct = sessionStorage.getItem("createdProducts");
+    return sessionStorageProduct
+      ? JSON.parse(sessionStorage.getItem("createdProducts"))
+      : [];
+  });
+  const [images, setImages] = useState({ image: [] });
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+
+  const handleImageChange = (e) => {
+    setImages({ ...images, image: e.target.files });
+  };
+
+  const getCreatedProduct = async () => {
+    try {
+      const newProducts = await axios.get(`${hostUrl}/api/product`);
+      setLoading(false);
+      console.log(newProducts.data);
+      setProducts(newProducts.data);
+      sessionStorage.setItem(
+        `createdProducts`,
+        JSON.stringify(newProducts.data)
+      );
+      localStorage.setItem(`createdProducts`, JSON.stringify(newProducts.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleCreateProduct = async (data) => {
+    const {
+      location,
+      askingPrice,
+      desc,
+      city,
+      state,
+      propertyType,
+      listingType,
+      measurementUnit,
+      marketValue,
+      landSize,
+    } = data;
+
+    const newProductData = new FormData();
+    newProductData.append("location", location);
+    newProductData.append("headerDesc", desc);
+    newProductData.append("askingPrice", askingPrice);
+    for (let i = 0; i < images.image.length; i++) {
+      newProductData.append("image", images.image[i]);
+    }
+    newProductData.append("city", city);
+    newProductData.append("state", state);
+    newProductData.append("propertType", propertyType);
+    newProductData.append("listType", listingType);
+    newProductData.append("measurementUnit", measurementUnit);
+    newProductData.append("marketValue", marketValue);
+    newProductData.append("landSize", landSize);
+    newProductData.append("available", available);
+
+    try {
+      const res = await axios.post(`${hostUrl}/api/product`, newProductData, {
+        headers: {
+          token: accessToken,
+        },
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const { pathname } = useLocation();
 
-  const changeHandle = (e) => {
-    setAdminProduct({ ...adminProduct, [e.target.name]: e.target.value });
-  };
-
-  const {
-    headerDescription,
-    listingType,
-    propertyType,
-    measurementUnit,
-    askingPrice,
-    marketValue,
-    state,
-    city,
-    locationName,
-    landSize,
-  } = adminProduct;
-
-  const handleAdminData = () => {
-    setMainAdminData([
-      ...mainAdminData,
-      {
-        headerDescription,
-        listingType,
-        propertyType,
-        measurementUnit,
-        askingPrice,
-        marketValue,
-        state,
-        city,
-        locationName,
-        landSize,
-      },
-    ]);
-    console.log(mainAdminData);
-  };
+  useEffect(() => {
+    getCreatedProduct();
+  }, []);
 
   const toggleModal = (e) => {
     switch (e.target.id) {
@@ -64,24 +100,6 @@ const AdminDashboard = () => {
         setModal(2);
         if (modal == 2) {
           setModal(1);
-        }
-        break;
-      case "listing-type":
-        setModal(4);
-        if (modal == 4) {
-          setModal(3);
-        }
-        break;
-      case "property-type":
-        setModal(6);
-        if (modal == 6) {
-          setModal(5);
-        }
-        break;
-      case "measurement-unit":
-        setModal(8);
-        if (modal == 8) {
-          setModal(7);
         }
         break;
       case null:
@@ -106,244 +124,80 @@ const AdminDashboard = () => {
         </div>
         <div
           className={`admin-hero-main-sect ${
-            modal === 2 ||
-            modal === 3 ||
-            modal === 4 ||
-            modal === 5 ||
-            modal === 6 ||
-            modal === 7 ||
-            modal === 8
-              ? "open-modal"
-              : ""
+            modal === 2 || modal === 3 ? "open-modal" : ""
           }`}
         >
           <div className="admin-hero-main-item admin-hero-main-item-1">
             <h3>Header Description</h3>
-            <input
-              name="header-desc"
-              type="text"
-              defaultValue={adminProduct.headerDescription}
-              onChange={(e) =>
-                setAdminProduct({
-                  ...adminProduct,
-                  headerDescription: e.target.value,
-                })
-              }
-            />
+            <input {...register("desc")} type="text" />
           </div>
           <div className="admin-hero-main-item admin-hero-main-item-2">
             <h3>Listing Type</h3>
-            <input
-              name="list-type"
-              type="text"
-              id="listing-type"
-              defaultValue={adminProduct.listingType}
-              onClick={toggleModal}
-            />
-            <div
-              className={`listing-type ${modal == 4 ? "open-dropdown" : ""}`}
-            >
-              <li
-                onClick={(e) =>
-                  setAdminProduct({
-                    ...adminProduct,
-                    listingType: e.target.innerText,
-                  })
-                }
-              >
-                Rent
-              </li>
-              <li
-                onClick={(e) =>
-                  setAdminProduct({
-                    ...adminProduct,
-                    listingType: e.target.innerText,
-                  })
-                }
-              >
-                Sale
-              </li>
-              <li
-                onClick={(e) =>
-                  setAdminProduct({
-                    ...adminProduct,
-                    listingType: e.target.innerText,
-                  })
-                }
-              >
-                Sale & Rent
-              </li>
-            </div>
+            <input {...register("listingType")} type="text" id="listing-type" />
           </div>
           <div className="admin-hero-main-item admin-hero-main-item-3">
             <h3>Property Type</h3>
             <input
-              name="property-type"
+              {...register("propertyType")}
               type="text"
-              defaultValue={adminProduct.propertyType}
               id="property-type"
-              onClick={toggleModal}
             />
-            <div
-              className={`listing-type ${modal == 6 ? "open-dropdown" : ""}`}
-            >
-              <li
-                onClick={(e) =>
-                  setAdminProduct({
-                    ...adminProduct,
-                    propertyType: e.target.innerText,
-                  })
-                }
-              >
-                Industrial
-              </li>
-              <li
-                onClick={(e) =>
-                  setAdminProduct({
-                    ...adminProduct,
-                    propertyType: e.target.innerText,
-                  })
-                }
-              >
-                Commercial
-              </li>
-              <li
-                onClick={(e) =>
-                  setAdminProduct({
-                    ...adminProduct,
-                    propertyType: e.target.innerText,
-                  })
-                }
-              >
-                Residential
-              </li>
-            </div>
           </div>
           <div className="admin-hero-main-item admin-hero-main-item-4">
             <h3>Measurement Unit</h3>
             <input
-              name="measurement-unit"
+              {...register("measurementUnit")}
               type="text"
-              defaultValue={adminProduct.measurementUnit}
               id="measurement-unit"
-              onClick={toggleModal}
             />
-            <div
-              className={`listing-type ${modal === 8 ? "open-dropdown" : ""}`}
-            >
-              <li
-                onClick={(e) =>
-                  setAdminProduct({
-                    ...adminProduct,
-                    measurementUnit: e.target.innerText,
-                  })
-                }
-              >
-                Sq Ft
-              </li>
-              <li
-                onClick={(e) =>
-                  setAdminProduct({
-                    ...adminProduct,
-                    measurementUnit: e.target.innerText,
-                  })
-                }
-              >
-                Sq m
-              </li>
-            </div>
           </div>
           <div className="admin-hero-main-item admin-hero-main-item-5">
             <h3>Land Size</h3>
-            <input
-              name="land-size"
-              type="text"
-              defaultValue={adminProduct.landSize}
-              onChange={(e) =>
-                setAdminProduct({
-                  ...adminProduct,
-                  landSize: e.target.value,
-                })
-              }
-            />
+            <input {...register("landSize")} type="text" />
           </div>
           <div className="admin-hero-main-item admin-hero-main-item-6">
             <h3>Asking Price (RM)</h3>
-            <input
-              name="asking-price"
-              type="text"
-              defaultValue={adminProduct.askingPrice}
-              onChange={(e) =>
-                setAdminProduct({
-                  ...adminProduct,
-                  askingPrice: e.target.value,
-                })
-              }
-            />
+            <input {...register("askingPrice")} type="text" />
           </div>
           <div className="admin-hero-main-item admin-hero-main-item-7">
             <h3>Market Value (RM)</h3>
-            <input
-              name="market-value"
-              type="text"
-              defaultValue={adminProduct.marketValue}
-              onChange={(e) =>
-                setAdminProduct({
-                  ...adminProduct,
-                  marketValue: e.target.value,
-                })
-              }
-            />
+            <input {...register("marketValue")} type="text" />
           </div>
           <div className="admin-hero-main-item admin-hero-main-item-8">
             <h3>State</h3>
-            <input
-              name="state"
-              type="text"
-              defaultValue={adminProduct.state}
-              onChange={(e) =>
-                setAdminProduct({
-                  ...adminProduct,
-                  state: e.target.value,
-                })
-              }
-            />
+            <input {...register("state")} type="text" />
           </div>
           <div className="admin-hero-main-item admin-hero-main-item-9">
             <h3>City</h3>
-            <input
-              name="city"
-              type="text"
-              defaultValue={adminProduct.city}
-              onChange={(e) =>
-                setAdminProduct({
-                  ...adminProduct,
-                  city: e.target.value,
-                })
-              }
-            />
+            <input {...register("city")} type="text" />
           </div>
           <div className="admin-hero-main-item admin-hero-main-item-10">
-            <h3>Location Name</h3>
+            <h3>Location</h3>
+            <input {...register("location")} type="text" />
+          </div>
+          <div className="admin-hero-main-item admin-hero-main-item-11">
+            <h3>Images</h3>
             <input
-              name="location-name"
-              type="text"
-              defaultValue={adminProduct.locationName}
-              onChange={(e) =>
-                setAdminProduct({
-                  ...adminProduct,
-                  locationName: e.target.value,
-                })
-              }
+              onChange={handleImageChange}
+              name="images"
+              type="file"
+              multiple
+            />
+          </div>
+          <div className="admin-hero-main-item admin-hero-main-item-12">
+            <h3>Available</h3>
+            <input
+              onClick={(e) => setAvailable(e.target.checked)}
+              type="checkbox"
             />
           </div>
           <button
             className="btn"
             id="case-one"
-            onClick={() => {
-              handleAdminData();
+            onClick={handleSubmit((data) => {
+              handleCreateProduct(data);
               setModal(1);
-            }}
+            })}
           >
             Save
           </button>
@@ -352,21 +206,30 @@ const AdminDashboard = () => {
           </button>
         </div>
       </section>
-      <section className="admin-card">
-        {mainAdminData.map((item, idx) => (
-          <div className="admin-card-parent-con" key={idx}>
-            <p>{item.listingType}</p>
-            <p>{item.headerDescription}</p>
-            <p>{item.landSize}</p>
-            <p>{item.city}</p>
-            <p>{item.locationName}</p>
-            <p>{item.state}</p>
-            <p>{item.measurementUnit}</p>
-            <p>{item.askingPrice}</p>
-            <p>{item.marketValue}</p>
+      {products.length > 0 && (
+        <div className="admin-card-header">
+          <div>
+            <p>Product Name</p>
           </div>
-        ))}
-      </section>
+          <div>
+            <p>Price</p>
+          </div>
+          <div>
+            <p>Quantity</p>
+          </div>
+          <div>
+            <p>Category</p>
+          </div>
+          <div>
+            <p>Status</p>
+          </div>
+        </div>
+      )}
+      <AdminCreatedProduct
+        products={products}
+        loading={loading}
+        setProducts={setProducts}
+      />
       <Footer />
     </section>
   );

@@ -13,7 +13,12 @@ import {
   Search,
 } from "./pages";
 
-import { AdminDashboard, AdminLogin, AdminRegistration } from "./pages/Admin";
+import {
+  AdminDashboard,
+  AdminLogin,
+  AdminRegistration,
+  ProductEdit,
+} from "./pages/Admin";
 
 function App() {
   const { pathname } = useLocation();
@@ -53,6 +58,7 @@ function App() {
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin-register" element={<AdminRegistration />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/product/edit/:id" element={<ProductEdit />} />
       </Routes>
     </>
   );

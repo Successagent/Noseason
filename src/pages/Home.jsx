@@ -6,9 +6,12 @@ import { Button, Footer, MobileNavbar, Navbar } from "../components";
 import shareVideo from "../assets/share.mp4";
 import teamLogo from "../assets/real-estate-team-2 (1).jpg";
 import { comm, pressLogo } from "../datas/products";
+import { useGlobalContext } from "../context/context";
 
-const Home = ({ fade_down, fade_up, fade_left, fade_right }) => {
+const Home = ({ fade_down, fade_up }) => {
   const { pathname } = useLocation();
+  const { hostUrl } = useGlobalContext();
+  console.log(hostUrl);
 
   return (
     <>

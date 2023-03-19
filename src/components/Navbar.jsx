@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
+import headerLogo from "../assets/NO SEASON I (1).png";
 const Navbar = ({ pathname }) => {
   const [headerStyle, setHeaderStyle] = useState("navbar");
 
@@ -20,7 +21,7 @@ const Navbar = ({ pathname }) => {
     <div className={`${headerStyle} nav`}>
       <div className="navbar-title-con">
         <Link to="/" className="link">
-          <h2 className="black">NOSEASON</h2>
+          <img height={100} width={100} src={headerLogo} alt="" />
         </Link>
       </div>
       <div className="navbar-links-con">

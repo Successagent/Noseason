@@ -4,8 +4,11 @@ import { useForm } from "react-hook-form";
 import { FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../components";
+import { useGlobalContext } from "../../context/context";
 
 const AdminRegistration = () => {
+  const { hostUrl } = useGlobalContext();
+
   const navigate = useNavigate();
   const {
     register,
@@ -16,15 +19,16 @@ const AdminRegistration = () => {
   const getData = async (data) => {
     try {
       const registerAdmin = await axios.post(
-        "http://localhost:5000/api/auth/adminRegister",
+        `${hostUrl}/api/auth/adminRegister`,
         {
-          fname: data.firstName,
-          lname: data.lastName,
+          fname: data.fname,
+          lname: data.lname,
           email: data.email,
           password: data.password,
-          cpassword: data.confirmPassword,
+          cpassword: data.cPassword,
         }
       );
+      console.log(registerAdmin);
       if (registerAdmin.status === 201) {
         navigate("/admin-login");
       }

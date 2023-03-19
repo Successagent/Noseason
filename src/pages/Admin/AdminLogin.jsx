@@ -4,9 +4,11 @@ import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Button } from "../../components";
+import { useGlobalContext } from "../../context/context";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
+  const { hostUrl } = useGlobalContext();
 
   const {
     handleSubmit,
@@ -18,16 +20,16 @@ const AdminLogin = () => {
     console.log(data.email, data.password);
     if (data.email && data.password.length > 5) {
       try {
-        const adminUser = await axios.post(
-          "http://localhost:5000/api/auth/admin",
-          {
-            email: data.email,
-            password: data.password,
-          }
-        );
+        const adminUser = await axios.post(`${hostUrl}/api/auth/admin`, {
+          email: data.email,
+          password: data.password,
+        });
         console.log(adminUser);
         if (adminUser.status === 200) {
-          localStorage.setItem("admin", JSON.stringify(adminUser.data));
+          localStorage.setItem(
+            "token",
+            JSON.stringify(adminUser.data.accessToken)
+          );
           navigate("/admin");
         }
       } catch (error) {
