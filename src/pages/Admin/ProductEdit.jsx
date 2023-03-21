@@ -14,7 +14,6 @@ const ProductEdit = () => {
   const { id } = useParams();
   const { hostUrl } = useGlobalContext();
   const { pathname } = useLocation();
-  console.log(id);
 
   const {
     handleSubmit,
