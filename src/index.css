@@ -91,26 +91,7 @@ body {
   color: white;
 }
 
-.contact-page .navbar h2,
-.property-hero .navbar h2,
-.about-hero-sect .navbar h2,
-.communities-hero-sect .navbar h2,
-.search-hero-sec .navbar h2,
-.product-navbar .navbar h2,
-.admin-dashboard .navbar .h2 {
-  font-size: 40px;
-}
 
-.home-navbar .navbar-2 h2,
-.contact-page .navbar-2 h2,
-.property-hero .navbar-2 h2,
-.about-hero-sect .navbar-2 h2,
-.communities-hero-sect .navbar-2 h2,
-.search-hero-sec .navbar-2 h2,
-.product-navbar .navbar-2 h2,
-.admin-dashboard .navbar-2 .h2 {
-  font-size: 40px;
-}
 
 .navbar .link {
   color: black;
@@ -525,7 +506,8 @@ img {
 .communities-hero-sect .navbar,
 .search-hero-sec .navbar,
 .product-navbar .navbar,
-.admin-dashboard .navbar {
+.admin-dashboard .navbar,
+.admin-product-edit .navbar {
   background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(3px);
 }
@@ -536,7 +518,8 @@ img {
 .communities-hero-sect .navbar li,
 .search-hero-sec .navbar li,
 .product-navbar .navbar li,
-.admin-dashboard .navbar li {
+.admin-dashboard .navbar li,
+.admin-product-edit .navbar li {
   color: #75797f;
   font-size: 14px;
   font-family: "Lato", sans-serif;
@@ -787,7 +770,7 @@ img {
   border: 3px solid #e5e8eb;
   color: #75797f;
   padding: 0;
-  width: 100px;
+  width: 160px;
 }
 
 .property-product-details {

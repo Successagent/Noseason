@@ -5,12 +5,15 @@ import AdminCreatedProduct from "./AdminCreatedProduct";
 import { useGlobalContext } from "../../context/context";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdminDashboard = () => {
   const [modal, setModal] = useState(1);
-  let accessToken = JSON.parse(localStorage.getItem("token"));
+  let accessToken = JSON.parse(sessionStorage.getItem("token"));
   const { hostUrl } = useGlobalContext();
   const [available, setAvailable] = useState(false);
+  const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState(() => {
     const sessionStorageProduct = sessionStorage.getItem("createdProducts");
@@ -47,6 +50,7 @@ const AdminDashboard = () => {
   };
 
   const handleCreateProduct = async (data) => {
+    notify();
     const {
       location,
       askingPrice,
@@ -85,7 +89,11 @@ const AdminDashboard = () => {
         },
       });
       console.log(res.data);
+      if (res.status == 200) {
+        setError(false);
+      }
     } catch (error) {
+      setError(false);
       console.log(error);
     }
   };
@@ -108,6 +116,14 @@ const AdminDashboard = () => {
         setModal(7) || setModal(5) || setModal(3);
         break;
     }
+  };
+
+  const notify = () => {
+    return error === true
+      ? toast("Property Added")
+      : error === false
+      ? toast("Some Fields are Empty")
+      : "";
   };
 
   return (
@@ -236,6 +252,7 @@ const AdminDashboard = () => {
         />
       )}
       <Footer />
+      <ToastContainer />
     </section>
   );
 };

@@ -5,16 +5,20 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import SkeLoading from "./SkeLoading";
 import { useGlobalContext } from "../../context/context";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdminCreatedProduct = ({ products, loading, setProducts }) => {
-  let accessToken = JSON.parse(localStorage.getItem("token"));
+  let accessToken = JSON.parse(sessionStorage.getItem("token"));
   const { hostUrl } = useGlobalContext();
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const notify = () => toast("Property Deleted");
+
   // Delete Product
   const deleteProduct = async (id) => {
-    console.log(id);
+    notify();
     setIsLoading(true);
     try {
       const removeProduct = await axios.post(
@@ -62,6 +66,7 @@ const AdminCreatedProduct = ({ products, loading, setProducts }) => {
             </div>
           </div>
         ))}
+      <ToastContainer />
     </>
   );
 };

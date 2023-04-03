@@ -6,11 +6,17 @@ import { useGlobalContext } from "../context/context";
 import Button from "./Button";
 
 const SearchModal = () => {
+  const { setQuery } = useGlobalContext();
+
   return (
     <div className="contact-filter">
       <div className="input-con">
         <AiOutlineSearch />
-        <input type="text" placeholder="Street, City, State, or Price" />
+        <input
+          type="text"
+          placeholder="Street or Location"
+          onChange={(e) => setQuery(e.target.value)}
+        />
       </div>
       <div className="home-flex">
         <button className="btn">SEARCH</button>
