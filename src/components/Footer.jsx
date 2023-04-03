@@ -9,24 +9,18 @@ const Footer = () => {
             <li>Home</li>
           </Link>
           <Link className="link">
-            <li>Home</li>
+            <li>Properties</li>
           </Link>
           <Link className="link">
-            <li>Home</li>
+            <li>About</li>
           </Link>
           <Link to="/contact" className="link">
             <li>Contact</li>
           </Link>
         </ul>
-        <p>
-          © 2023 WP Pro Real Estate 7 Premium WordPress Theme, All Rights
-          Reserved. Back to top
-        </p>
+        <p>© 2023 NoSeason, All Rights Reserved. Back to top</p>
       </section>
-      <p>
-        San Diego Multiple Listing Service Inc. - Powered by RealtyWatch
-        Solutions
-      </p>
+      <p>Nigeria Real Eastate Service Inc. - Powered by Noseason</p>
     </footer>
   );
 };

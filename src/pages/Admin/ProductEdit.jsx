@@ -8,8 +8,21 @@ import { useGlobalContext } from "../../context/context";
 const ProductEdit = () => {
   const [modal, setModal] = useState(1);
   const [editProduct, setEditProduct] = useState([]);
-  let { name, price, quantity, category, desc, sizes, image } = editProduct;
-  let accessToken = JSON.parse(sessionStorage.getItem("admin"));
+  let {
+    location,
+    marketValue,
+    landSize,
+    measurementUnit,
+    state,
+    image,
+    propertType,
+    listType,
+    headerDesc,
+    askingPrice,
+    city,
+    available,
+  } = editProduct;
+  let accessToken = JSON.parse(sessionStorage.getItem("token"));
   const [showImages, setShowImages] = useState(false);
   const { id } = useParams();
   const { hostUrl } = useGlobalContext();
@@ -31,20 +44,31 @@ const ProductEdit = () => {
   };
 
   const handleUpdateProduct = async (data) => {
-    const updatedProduct = data;
-    updatedProduct.category = data.category ? data.category : category;
-    updatedProduct.name = data.name ? data.name : name;
-    updatedProduct.quantity = data.quantity ? data.quantity : quantity;
-    updatedProduct.price = data.price ? data.price : price;
-    updatedProduct.desc = data.desc ? data.desc : desc;
+    console.log(data);
+
+    data.landSize = data.landSize ? data.landSize : landSize;
+    data.headerDesc = data.headerDesc ? data.headerDesc : headerDesc;
+    data.measurementUnit = data.measurementUnit
+      ? data.measurementUnit
+      : measurementUnit;
+    data.state = data.state ? data.state : state;
+    data.location = data.location ? data.location : location;
+    data.city = data.city ? data.city : city;
+    data.listType = data.listType ? data.listType : listType;
+    data.propertType = data.propertType ? data.propertType : propertType;
+    data.askingPrice = data.askingPrice ? data.askingPrice : askingPrice;
+    data.marketValue = data.marketValue ? data.marketValue : marketValue;
+    data.available = data.available ? data.available : available;
+
     try {
       const editedProduct = await axios.put(
         `${hostUrl}/api/product/update/${id}`,
-        updatedProduct,
+        data,
         {
           headers: { token: accessToken },
         }
       );
+      console.log(editedProduct.data);
     } catch (error) {
       console.log(error);
     }
@@ -89,53 +113,85 @@ const ProductEdit = () => {
             }`}
           >
             <div className="admin-hero-main-item admin-hero-main-item-1">
-              <h3>Category</h3>
+              <h3>Header Description</h3>
               <input
-                name="category"
+                {...register("headerDesc")}
                 type="text"
-                {...register("category")}
-                defaultValue={editProduct ? editProduct.category : "Loading..."}
+                defaultValue={headerDesc}
               />
             </div>
             <div className="admin-hero-main-item admin-hero-main-item-2">
-              <h3>Product Name</h3>
+              <h3>Listing Type</h3>
               <input
-                name="productName"
+                {...register("listType")}
                 type="text"
-                id="productNname"
-                {...register("name")}
-                defaultValue={editProduct.name}
+                id="listing-type"
+                defaultValue={listType}
               />
             </div>
             <div className="admin-hero-main-item admin-hero-main-item-3">
-              <h3>Description</h3>
+              <h3>Property Type</h3>
               <input
-                name="description"
+                {...register("propertType")}
                 type="text"
-                id="description"
-                {...register("desc")}
-                defaultValue={editProduct.desc}
+                id="property-type"
+                defaultValue={propertType}
+              />
+            </div>
+            <div className="admin-hero-main-item admin-hero-main-item-4">
+              <h3>Category</h3>
+              <input
+                {...register("measurementUnit")}
+                type="text"
+                id="measurement-unit"
+                defaultValue={measurementUnit}
               />
             </div>
             <div className="admin-hero-main-item admin-hero-main-item-5">
-              <h3>Quantity</h3>
+              <h3>Land Size</h3>
               <input
-                name="quantity"
+                {...register("landSize")}
                 type="text"
-                id="quantity"
-                {...register("quantity")}
-                defaultValue={editProduct.quantity}
+                defaultValue={landSize}
               />
             </div>
             <div className="admin-hero-main-item admin-hero-main-item-6">
-              <h3>Price</h3>
+              <h3>Asking Price (RM)</h3>
               <input
-                name="price"
+                {...register("askingPrice")}
                 type="text"
-                id="price"
-                {...register("price")}
-                defaultValue={editProduct.price}
+                defaultValue={askingPrice}
               />
+            </div>
+            <div className="admin-hero-main-item admin-hero-main-item-7">
+              <h3>Market Value (RM)</h3>
+              <input
+                {...register("marketValue")}
+                type="text"
+                defaultValue={marketValue}
+              />
+            </div>
+            <div className="admin-hero-main-item admin-hero-main-item-8">
+              <h3>State</h3>
+              <input {...register("state")} type="text" defaultValue={state} />
+            </div>
+
+            <div className="admin-hero-main-item admin-hero-main-item-9">
+              <h3>City</h3>
+              <input {...register("city")} type="text" defaultValue={city} />
+            </div>
+            <div className="admin-hero-main-item admin-hero-main-item-10">
+              <h3>Location</h3>
+              <input
+                {...register("location")}
+                type="text"
+                defaultValue={location}
+              />
+            </div>
+
+            <div className="admin-hero-main-item admin-hero-main-item-12">
+              <h3>Available</h3>
+              <input type="checkbox" defaultChecked={available} />
             </div>
             <button
               className="btn"
@@ -152,19 +208,19 @@ const ProductEdit = () => {
         <section className="admin-card">
           <div className="admin-card-header">
             <div>
-              <p>Product Name</p>
+              <p>Product</p>
             </div>
             <div>
               <p>Price</p>
             </div>
             <div>
-              <p>Quantity</p>
+              <p>Location</p>
             </div>
             <div>
               <p>Category</p>
             </div>
             <div>
-              <p>Sizes</p>
+              <p>Land Size</p>
             </div>
           </div>
         </section>
@@ -173,21 +229,21 @@ const ProductEdit = () => {
             <img
               style={{ cursor: "pointer" }}
               src={image && image[0].url}
-              alt={name}
+              alt={location}
             />
-            <p>{editProduct.name}</p>
+            <p>{state}</p>
           </div>
           <div>
-            <p>{price}</p>
+            <p>{marketValue}</p>
           </div>
           <div>
-            <p>{quantity}</p>
+            <p>{location}</p>
           </div>
           <div>
-            <p>{category}</p>
+            <p>{measurementUnit}</p>
           </div>
           <div>
-            <p>{sizes}</p>
+            <p>{landSize}</p>
           </div>
         </div>
         <div

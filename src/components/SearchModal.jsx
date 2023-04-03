@@ -1,48 +1,27 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaAngleDown, FaAngleUp, FaSearch, FaFilter } from "react-icons/fa";
+import { useGlobalContext } from "../context/context";
 import Button from "./Button";
 
 const SearchModal = () => {
-  const [zipCode, setZipCodes] = useState(false);
-  const handleZipCon = () => {
-    setZipCodes(!zipCode);
-  };
   return (
     <div className="contact-filter">
       <div className="input-con">
         <AiOutlineSearch />
-        <input type="text" placeholder="Street, City, State, or Zip" />
-      </div>
-      <div className="input-con">
-        <p>All Status</p>
-        <FaAngleDown />
-      </div>
-      <div className="input-con">
-        <p>All Cities</p>
-        <FaAngleDown />
-      </div>
-      <div className="input-con zip-codes-con" onClick={handleZipCon}>
-        <p>All Zipcodes</p>
-        <div className="zip-con" data-visible={zipCode}>
-          <p>56001</p>
-          <p>54501</p>
-          <p>54531</p>
-          <p>56631</p>
-          <p>56001</p>
-          <p>54501</p>
-          <p>54531</p>
-          <p>56631</p>
-          <p>56001</p>
-          <p>54501</p>
-          <p>54531</p>
-          <p>56631</p>
-        </div>
-        <FaAngleDown />
+        <input type="text" placeholder="Street, City, State, or Price" />
       </div>
       <div className="home-flex">
-        <Button title="SEARCH" />
-        <Button title="MORE" />
+        <button className="btn">SEARCH</button>
+      </div>
+      <div className="home-flex">
+        <button className="btn reset">RESET</button>
+      </div>
+      <div className="home-flex">
+        <button className="btn">
+          <FaFilter />
+        </button>
       </div>
       <div className="show-mobile">
         <Button icon={<FaSearch />} />

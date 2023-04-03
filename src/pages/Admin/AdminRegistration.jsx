@@ -32,11 +32,9 @@ const AdminRegistration = () => {
       if (registerAdmin.status === 201) {
         navigate("/admin-login");
       }
-      console.log(registerAdmin);
     } catch (error) {
       console.log(error);
     }
-    console.log(data);
   };
 
   return (

@@ -1,72 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-
-import agent from "../assets/agent-7.jpg";
-import { client, urlFor } from "../lib/client";
-
-import { Button } from "../components";
+import agent from "../assets/NO SEASON I (1).png";
+import { useGlobalContext } from "../context/context";
 
 const Products = ({ pathname, fade_up, slug }) => {
-  const [loading, setLoading] = useState(false);
-  const [houses, setHouses] = useState([]);
-  let filter9 = houses.slice(0, 9);
-  let filter12 = houses.slice(0, 12);
-  let view = houses.slice(0, 4);
-  let componentMounted = true;
-
-  console.log(slug);
-
-  const getProducts = () => {
-    setLoading(true);
-    if (componentMounted) {
-      setLoading(false);
-    }
-
-    return () => {
-      componentMounted = false;
-    };
-  };
-  useEffect(() => {
-    getProducts();
-    client
-      .fetch(
-        `*[_type == "product"] {
-    city,
-    details,
-    image,
-    name,
-    price,
-     slug,
-    street,
-    logo,
-    id
-  }`
-      )
-      .then((data) => {
-        setHouses(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  const Loading = () => {
-    return (
-      <>
-        <div className="loading-con">
-          <div>
-            <Skeleton count={5} height={450} />
-          </div>
-          <div>
-            <Skeleton count={5} height={450} />
-          </div>
-          <div>
-            <Skeleton count={5} height={450} />
-          </div>
-        </div>
-      </>
-    );
-  };
+  const { properties } = useGlobalContext();
+  let filter9 = properties.slice(0, 9);
+  let filter12 = properties.slice(0, 12);
+  let view = properties.slice(0, 4);
 
   const ShowProducts = () => {
     return (
@@ -76,47 +18,41 @@ const Products = ({ pathname, fade_up, slug }) => {
         ? view
         : pathname == "/search"
         ? filter12
-        : houses
+        : properties
     ).map((product, idx) => (
-      <Link
-        className="container-link"
-        key={idx}
-        to={`/products/${product.slug.current}`}
-      >
+      <section className="container-link" key={idx}>
         <div className="property-product-image-con">
-          <img src={urlFor(product.image[0])} alt="" />
+          <img src={product.image[0].url} alt="" />
         </div>
         <div className="property-product-details">
-          <h1>${product.price}/Year</h1>
-          <h3></h3>
+          <h1>N{product.marketValue}/Year</h1>
+          <h3>{product.headerDesc}</h3>
           <div className="product-viewmore-con">
             <div>
               <p>{product.city}</p>
-              <h5>{product.street}</h5>
+              <h5>{product.location}</h5>
             </div>
-            <Button title="View All" />
+            <Link to={`/products/${product._id}`}>
+              <button className="btn">View All</button>
+            </Link>
           </div>
           <div className="property-product-agent-con">
             <h3>No Season</h3>
             <img src={agent} alt="" />
           </div>
         </div>
-      </Link>
+      </section>
     ));
   };
   return (
     <div>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div
-          className="property-product-con"
-          data-visible={pathname}
-          data-aos={fade_up}
-        >
-          <ShowProducts />
-        </div>
-      )}
+      <div
+        className="property-product-con"
+        data-visible={pathname}
+        data-aos={fade_up}
+      >
+        <ShowProducts />
+      </div>
     </div>
   );
 };

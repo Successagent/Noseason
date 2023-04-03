@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { Button, Footer, MobileNavbar, Navbar } from "../components";
 
@@ -39,8 +39,12 @@ const Home = ({ fade_down, fade_up }) => {
           right place.
         </h3>
         <div className="home-flex">
-          <Button title="View Our Listing" />
-          <Button title="Search the MLS" />
+          <Link to={"/properties"}>
+            <button className="btn">View Our Listing</button>
+          </Link>
+          <Link to={"/search"}>
+            <button className="btn">Search Properties</button>
+          </Link>
         </div>
       </section>
       <section className="team-section">

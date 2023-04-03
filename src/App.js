@@ -54,7 +54,7 @@ function App() {
           element={<Communities fade_up="fade-up" />}
         />
         <Route path="/search" element={<Search />} />
-        <Route path="/products/:slug" element={<Product />} />
+        <Route path="/products/:id" element={<Product />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin-register" element={<AdminRegistration />} />
         <Route path="/admin" element={<AdminDashboard />} />

@@ -14,6 +14,7 @@ const AdminCreatedProduct = ({ products, loading, setProducts }) => {
 
   // Delete Product
   const deleteProduct = async (id) => {
+    console.log(id);
     setIsLoading(true);
     try {
       const removeProduct = await axios.post(
@@ -21,11 +22,14 @@ const AdminCreatedProduct = ({ products, loading, setProducts }) => {
         { id: id },
         { headers: { token: accessToken } }
       );
+      console.log(removeProduct);
 
       if (removeProduct.status === 200) {
         setProducts(products.filter((item) => item._id !== id));
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
     setIsLoading(false);
   };
   if (loading || isLoading === true) return <SkeLoading />;
@@ -36,16 +40,16 @@ const AdminCreatedProduct = ({ products, loading, setProducts }) => {
           <div className="admin-card-parent-con" key={idx}>
             <div className="admin-card-image-con">
               <img src={item.image[0].url} alt={item.city} />
-              <p>{item.headerDesc}</p>
+              <p>{item.state}</p>
             </div>
             <div>
-              <p>{item.state}</p>
+              <p>{item.location}</p>
             </div>
             <div>
               <p>{item.askingPrice}</p>
             </div>
             <div>
-              <p>{item.location}</p>
+              <p>{item.measurementUnit}</p>
             </div>
             <div>
               <BsTrash

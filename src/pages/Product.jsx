@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
-import { client, urlFor } from "../lib/client";
+import { HashLink } from "react-router-hash-link";
+
 import {
   Button,
   Footer,
@@ -14,33 +15,14 @@ import { MdFacebook } from "react-icons/md";
 import { FaTwitter, FaYoutube, FaLinkedinIn } from "react-icons/fa";
 import agent from "../assets/agent-7.jpg";
 import { CgInstagram } from "react-icons/cg";
+import { useGlobalContext } from "../context/context";
 
 const Product = () => {
-  const [house, setHouse] = useState([]);
-  const { slug } = useParams();
+  const { properties } = useGlobalContext();
+  const { id } = useParams();
+  const property = properties.filter((property) => property._id === id);
 
   const { pathname } = useLocation();
-
-  useEffect(() => {
-    client
-      .fetch(
-        `*[slug.current == "${slug}"] {
-      city,
-      details,
-      image,
-      name,
-      price,
-       slug,
-      street,
-      logo,
-      id
-    }`
-      )
-      .then((data) => {
-        setHouse(data);
-      })
-      .catch((err) => console.log(err));
-  }, [slug]);
 
   return (
     <div className="product-con">
@@ -62,18 +44,21 @@ const Product = () => {
       </div>
       <div className="product-view-con">
         <div className="product-view-image-con">
-          {house[0]?.image?.map((item, idx) => (
-            <img key={idx} src={urlFor(item)} />
+          {property[0].image.map((item, idx) => (
+            <img key={idx} src={item.url} />
           ))}
         </div>
         <div className="product-view-text-con">
           <div className="product-feature-sect">
             <Button title="Featured" />
+            <button className="btn">
+              {property[0].available ? "available" : "not available"}
+            </button>
           </div>
-          <h1 className="product-title">{house[0]?.street}</h1>
-          <p>{house[0]?.city}</p>
+          <h1 className="product-title">{property[0].location}</h1>
+          <p>{property[0].city}</p>
           <div>
-            <h2>${house[0]?.price}</h2>
+            <h2>N{property[0].marketValue}</h2>
           </div>
           <div className="noseason-contact-sect">
             <div>
@@ -106,7 +91,12 @@ const Product = () => {
                     <MdFacebook />
                   </div>
                   <div>
-                    <CgInstagram />
+                    <a
+                      href="https://www.instagram.com/noseason.ng"
+                      target="_blank"
+                    >
+                      <CgInstagram />
+                    </a>
                   </div>
                   <div>
                     <FaLinkedinIn />
@@ -127,7 +117,7 @@ const Product = () => {
               </form>
             </div>
             <div className="product-products-con">
-              <Products slug={slug} />
+              <Products slug={id} />
             </div>
           </div>
         </div>

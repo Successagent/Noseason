@@ -58,6 +58,7 @@ const AdminDashboard = () => {
       measurementUnit,
       marketValue,
       landSize,
+      category,
     } = data;
 
     const newProductData = new FormData();
@@ -75,6 +76,7 @@ const AdminDashboard = () => {
     newProductData.append("marketValue", marketValue);
     newProductData.append("landSize", landSize);
     newProductData.append("available", available);
+    newProductData.append("category", category);
 
     try {
       const res = await axios.post(`${hostUrl}/api/product`, newProductData, {
@@ -144,7 +146,7 @@ const AdminDashboard = () => {
             />
           </div>
           <div className="admin-hero-main-item admin-hero-main-item-4">
-            <h3>Measurement Unit</h3>
+            <h3>Category</h3>
             <input
               {...register("measurementUnit")}
               type="text"
@@ -167,6 +169,7 @@ const AdminDashboard = () => {
             <h3>State</h3>
             <input {...register("state")} type="text" />
           </div>
+
           <div className="admin-hero-main-item admin-hero-main-item-9">
             <h3>City</h3>
             <input {...register("city")} type="text" />
@@ -209,13 +212,13 @@ const AdminDashboard = () => {
       {products.length > 0 && (
         <div className="admin-card-header">
           <div>
-            <p>Product Name</p>
+            <p>Product</p>
+          </div>
+          <div>
+            <p>Location</p>
           </div>
           <div>
             <p>Price</p>
-          </div>
-          <div>
-            <p>Quantity</p>
           </div>
           <div>
             <p>Category</p>
@@ -225,11 +228,13 @@ const AdminDashboard = () => {
           </div>
         </div>
       )}
-      <AdminCreatedProduct
-        products={products}
-        loading={loading}
-        setProducts={setProducts}
-      />
+      {accessToken && (
+        <AdminCreatedProduct
+          products={products}
+          loading={loading}
+          setProducts={setProducts}
+        />
+      )}
       <Footer />
     </section>
   );

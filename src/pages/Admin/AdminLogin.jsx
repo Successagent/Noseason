@@ -26,7 +26,7 @@ const AdminLogin = () => {
         });
         console.log(adminUser);
         if (adminUser.status === 200) {
-          localStorage.setItem(
+          sessionStorage.setItem(
             "token",
             JSON.stringify(adminUser.data.accessToken)
           );
