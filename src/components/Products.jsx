@@ -13,10 +13,11 @@ const Products = ({ pathname, fade_up, slug }) => {
   let view = properties.slice(0, 4);
 
   const ShowProducts = () => {
+    const products = JSON.parse(localStorage.getItem(`createdProducts`));
     if (loading)
       return (
         <>
-          {properties.map((item, idx) => (
+          {products.map((item, idx) => (
             <section className="container-link" key={idx}>
               <div className="property-product-image-con">
                 <Skeleton height={`${100}%`} />

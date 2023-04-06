@@ -90,6 +90,7 @@ const AdminDashboard = () => {
       });
       console.log(res.data);
       if (res.status == 200) {
+        localStorage.setItem(`createdProducts`, JSON.stringify(res.data));
         setError(false);
       }
     } catch (error) {

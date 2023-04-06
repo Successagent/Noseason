@@ -26,7 +26,6 @@ const AdminCreatedProduct = ({ products, loading, setProducts }) => {
         { id: id },
         { headers: { token: accessToken } }
       );
-      console.log(removeProduct);
 
       if (removeProduct.status === 200) {
         setProducts(products.filter((item) => item._id !== id));
