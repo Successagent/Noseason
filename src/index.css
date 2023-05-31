@@ -742,7 +742,6 @@ img {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  height: 450px;
   transition: all ease-in-out 500ms;
 }
 
