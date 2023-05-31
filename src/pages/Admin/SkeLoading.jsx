@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const SkeLoading = () => {
-  const products = JSON.parse(localStorage.getItem(`createdProducts`));
+  const products = JSON.parse(sessionStorage.getItem(`createdProducts`));
+  console.log(products);
 
   return (
     <>
