@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Footer, Hero, MobileNavbar, Navbar } from "../../components";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Footer, MobileNavbar, Navbar } from "../../components";
+import { useLocation, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useGlobalContext } from "../../context/context";
+import { toast, ToastContainer } from "react-toastify";
 
 const ProductEdit = () => {
   const [modal, setModal] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState({});
   const [editProduct, setEditProduct] = useState([]);
   let {
     location,
@@ -27,12 +30,9 @@ const ProductEdit = () => {
   const { id } = useParams();
   const { hostUrl } = useGlobalContext();
   const { pathname } = useLocation();
+  const notify = () => toast(err);
 
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm();
+  const { handleSubmit, register } = useForm();
 
   const getCreatedProduct = async () => {
     try {
@@ -45,7 +45,6 @@ const ProductEdit = () => {
 
   const handleUpdateProduct = async (data) => {
     console.log(data);
-
     data.landSize = data.landSize ? data.landSize : landSize;
     data.headerDesc = data.headerDesc ? data.headerDesc : headerDesc;
     data.measurementUnit = data.measurementUnit
@@ -59,7 +58,7 @@ const ProductEdit = () => {
     data.askingPrice = data.askingPrice ? data.askingPrice : askingPrice;
     data.marketValue = data.marketValue ? data.marketValue : marketValue;
     data.available = data.available ? data.available : available;
-
+    setLoading(true);
     try {
       const editedProduct = await axios.put(
         `${hostUrl}/api/product/update/${id}`,
@@ -68,9 +67,13 @@ const ProductEdit = () => {
           headers: { token: accessToken },
         }
       );
-      console.log(editedProduct.data);
+      if (editedProduct.status == 200) {
+        setLoading(false);
+      }
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      setErr(error.message);
+      notify();
     }
   };
 
@@ -204,11 +207,12 @@ const ProductEdit = () => {
                 onClick={handleSubmit((e) => handleUpdateProduct(e))}
                 id="case-two"
               >
-                Save
+                {loading ? "Loading..." : "Save"}
               </button>
               <button className="btn green" id="case-one" onClick={toggleModal}>
                 Close
               </button>
+              <ToastContainer />
             </div>
           </section>
           <section className="admin-card">

@@ -32,11 +32,11 @@ const Home = ({ fade_down, fade_up }) => {
         <MobileNavbar />
       </div>
       <section className="home-landing-section">
-        <p data-aos={fade_down}>SAN DIEGO #1 REAL ESTATE</p>
+        <p data-aos={fade_down}>BAYELSA #1 REAL ESTATE</p>
         <h1>NO SEASON </h1>
         <h3>
-          Whether you’re looking to buy or sell in San Diego, you’ve come to the
-          right place.
+          Whether you’re looking to buy or sell land in Yenagoa, you’ve come to
+          the right place.
         </h3>
         <div className="home-flex">
           <Link to={"/properties"}>
@@ -54,10 +54,9 @@ const Home = ({ fade_down, fade_up }) => {
             Let me help you find the home of your dreams.
           </h2>
           <h5 data-aos={fade_up}>
-            Whether its an apartment in the historic Gaslamp District, a
-            sprawling estate in Rancho Santa Fe or a beautiful beach front home
-            in La Jolla, we at Blair Owens Realty have you and your family
-            covered.
+            Whether its an apartment in the Express, a sprawling estate in GRA
+            or a beautiful home in Yenagoa, we Noseason at Yenagoa have you and
+            your family covered.
           </h5>
         </div>
         <div>
@@ -91,14 +90,14 @@ const Home = ({ fade_down, fade_up }) => {
           })}
         </div>
       </section>
-      <section className="home-press-section">
+      {/* <section className="home-press-section">
         <h2 className="h2">In The Press</h2>
         <div className="home-flex-press-section">
           {pressLogo.map((img, idx) => {
             return <img src={img.logo} alt="logo" key={idx} />;
           })}
         </div>
-      </section>
+      </section> */}
       <Footer />
     </>
   );

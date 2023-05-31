@@ -3,6 +3,7 @@ import axios from "axios";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
+  // const hostUrl = "http://localhost:5000";
   const hostUrl = "https://noseason-api.onrender.com";
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");

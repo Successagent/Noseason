@@ -19,6 +19,7 @@ import {
   AdminRegistration,
   ProductEdit,
 } from "./pages/Admin";
+import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
   const { pathname } = useLocation();
@@ -54,11 +55,13 @@ function App() {
           element={<Communities fade_up="fade-up" />}
         />
         <Route path="/search" element={<Search />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/admin/product/edit/:id" element={<ProductEdit />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+        </Route>
         <Route path="/products/:id" element={<Product />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin-register" element={<AdminRegistration />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/product/edit/:id" element={<ProductEdit />} />
       </Routes>
     </>
   );

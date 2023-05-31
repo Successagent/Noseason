@@ -245,13 +245,11 @@ const AdminDashboard = () => {
           </div>
         </div>
       )}
-      {accessToken && (
-        <AdminCreatedProduct
-          products={products}
-          loading={loading}
-          setProducts={setProducts}
-        />
-      )}
+      <AdminCreatedProduct
+        products={products}
+        loading={loading}
+        setProducts={setProducts}
+      />
       <Footer />
       <ToastContainer />
     </section>

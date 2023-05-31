@@ -69,15 +69,15 @@ const Product = () => {
               <div>
                 <div className="product-contact-flex">
                   <AiOutlinePhone />
-                  <p>(+234) 7088613251</p>
+                  <p>(+234) 9166308482</p>
                 </div>
                 <div className="product-contact-flex">
                   <AiOutlinePhone />
-                  <p>(+234) 7088613251</p>
+                  <p>(+234) 9166308482</p>
                 </div>
                 <div className="product-contact-flex">
                   <AiOutlinePhone />
-                  <p>(+234) 7088613251</p>
+                  <p>(+234) 9166308482</p>
                 </div>
                 <div className="product-contact-flex">
                   <AiOutlineMail />

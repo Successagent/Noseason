@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { FaAngleUp } from "react-icons/fa";
+import headerLogo from "../assets/NO SEASON I (1).png";
 
 import { CgProfile } from "react-icons/cg";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -17,7 +18,7 @@ const MobileNavbar = ({}) => {
     <div className="mobile-navbar">
       <div>
         <Link to="/">
-          <h2>NOSEASON</h2>
+          <img src={headerLogo} alt="" />
         </Link>
       </div>
       <div className="navigation-con">

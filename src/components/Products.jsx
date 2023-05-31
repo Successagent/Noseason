@@ -17,51 +17,55 @@ const Products = ({ pathname, fade_up, slug }) => {
     if (loading)
       return (
         <>
-          {products.map((item, idx) => (
-            <section className="container-link" key={idx}>
-              <div className="property-product-image-con">
-                <Skeleton height={`${100}%`} />
-              </div>
-              <div className="property-product-details">
-                <Skeleton
-                  width={200}
-                  height={40}
-                  style={{ marginLeft: "15px" }}
-                ></Skeleton>
-                <Skeleton
-                  width={300}
-                  height={20}
-                  style={{ margin: "15px 0px 5px 15px" }}
-                ></Skeleton>
-                <div className="product-viewmore-con">
-                  <div>
-                    <Skeleton
-                      height={20}
-                      width={100}
-                      style={{ margin: "15px 0px 0px 15px" }}
-                    ></Skeleton>
-                    <Skeleton
-                      width={80}
-                      style={{ margin: "10px 0px 0px 15px" }}
-                    ></Skeleton>
-                  </div>
-                  <Skeleton height={50} width={150}></Skeleton>
+          {products &&
+            products.map((item, idx) => (
+              <section className="container-link" key={idx}>
+                <div className="property-product-image-con">
+                  <Skeleton height={`${100}%`} />
                 </div>
-              </div>
-              <div className="property-product-agent-con">
-                <Skeleton
-                  width={50}
-                  height={10}
-                  style={{ margin: "5px 0px 10px 15px" }}
-                ></Skeleton>
-                <Skeleton
-                  width={50}
-                  height={50}
-                  style={{ margin: "5px 15px 10px 15px", borderRadius: "50%" }}
-                ></Skeleton>
-              </div>
-            </section>
-          ))}
+                <div className="property-product-details">
+                  <Skeleton
+                    width={200}
+                    height={40}
+                    style={{ marginLeft: "15px" }}
+                  ></Skeleton>
+                  <Skeleton
+                    width={300}
+                    height={20}
+                    style={{ margin: "15px 0px 5px 15px" }}
+                  ></Skeleton>
+                  <div className="product-viewmore-con">
+                    <div>
+                      <Skeleton
+                        height={20}
+                        width={100}
+                        style={{ margin: "15px 0px 0px 15px" }}
+                      ></Skeleton>
+                      <Skeleton
+                        width={80}
+                        style={{ margin: "10px 0px 0px 15px" }}
+                      ></Skeleton>
+                    </div>
+                    <Skeleton height={50} width={150}></Skeleton>
+                  </div>
+                </div>
+                <div className="property-product-agent-con">
+                  <Skeleton
+                    width={50}
+                    height={10}
+                    style={{ margin: "5px 0px 10px 15px" }}
+                  ></Skeleton>
+                  <Skeleton
+                    width={50}
+                    height={50}
+                    style={{
+                      margin: "5px 15px 10px 15px",
+                      borderRadius: "50%",
+                    }}
+                  ></Skeleton>
+                </div>
+              </section>
+            ))}
         </>
       );
     return properties
