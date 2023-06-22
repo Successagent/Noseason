@@ -106,10 +106,7 @@ const Contact = () => {
           </form>
           <div className="contact-details">
             <h3>Contact Details</h3>
-            <p>
-              Based out of San Diego, CA, Contempo is a small web design studio
-              headed up by designer Chris Robinson.
-            </p>
+            <p>Noseason is real Estate company</p>
             <div className="contact-flex">
               <GrLocation />
               <p>555 Somewhere st. San Diego, CA 92101</p>
