@@ -8,6 +8,7 @@ import { useGlobalContext } from "../../context/context";
 
 const AdminRegistration = () => {
   const { hostUrl } = useGlobalContext();
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const {
@@ -17,6 +18,7 @@ const AdminRegistration = () => {
   } = useForm();
 
   const getData = async (data) => {
+    setLoading(true);
     try {
       const registerAdmin = await axios.post(
         `${hostUrl}/api/auth/adminRegister`,
@@ -31,9 +33,11 @@ const AdminRegistration = () => {
       console.log(registerAdmin);
       if (registerAdmin.status === 201) {
         navigate("/admin-login");
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -110,7 +114,7 @@ const AdminRegistration = () => {
             <input type="checkbox" />
             <h4>Accept the terms and condition's</h4>
           </div>
-          <Button title="Register" />
+          <Button title={loading ? "Loading..." : "Register"} />
         </form>
       </div>
     </section>

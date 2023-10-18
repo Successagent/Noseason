@@ -12,7 +12,7 @@ const AdminLogin = () => {
   const { hostUrl } = useGlobalContext();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
-  console.log(error);
+
   const {
     handleSubmit,
     register,
@@ -89,7 +89,7 @@ const AdminLogin = () => {
           </form>
         </div>
       </div>
-      {error.data === "Wrong credentials" && <ToastContainer />}
+      {error?.data === "Wrong credentials" && <ToastContainer />}
     </>
   );
 };
